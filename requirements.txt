@@ -1,0 +1,10 @@
+aiohttp
+aiodns
+beautifulsoup4
+cchardet
+elasticsearch
+argparse
+aiohttp
+asyncio
+async_timeout
+requests
