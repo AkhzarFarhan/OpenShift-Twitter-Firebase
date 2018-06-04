@@ -11,6 +11,7 @@ import async_timeout
 import concurrent.futures
 import contextlib
 import csv
+import time
 import datetime
 import hashlib
 import json
@@ -484,10 +485,12 @@ async def outTweet(tweet):
                    "tag": arg.s}
             url = 'https://selenium-try-49063.firebaseio.com/text.json'
             requests.post(url, json=dat)
+            time_wa = str(dat["time"])
+            if time_wa[4] == "5":
+                requests.delete(url)
         else:
             # Writes or appends to a file.
             print(output, file=open(arg.o, "a", encoding="utf-8"))
-
     return output
 
 async def getTweets(init):
@@ -754,7 +757,6 @@ class Arguments:
     following = None
     favorites = None
     debug = False
-
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(prog="twint.py", usage="python3 %(prog)s [options]", description="twint.py - An Advanced Twitter Scraping Tool")
