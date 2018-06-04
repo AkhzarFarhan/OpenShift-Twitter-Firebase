@@ -482,7 +482,7 @@ async def outTweet(tweet):
             dat = {"id": tweetid, "date": date, "time": time, "timezone": timezone, "username": username,
                    "content": text, "replies": replies, "retweets": retweets, "likes": likes, "hashtags": hashtags,
                    "tag": arg.s}
-            url = 'https://selenium-try.firebaseio.com/text.json'
+            url = 'https://selenium-try-49063.firebaseio.com/text.json'
             requests.post(url, json=dat)
         else:
             # Writes or appends to a file.
@@ -725,9 +725,9 @@ def check():
 
 class Arguments:
     u = None
-    s = "Bitcoin" # Edit the coin name
+    s = "cryptocurrency" # Edit the coin name
     g = None
-    l = "en" # Langiage is set to English
+    l = "en" # Language is set to English
     o = True # Output file name
     es = ""
     elasticsearch = ""
