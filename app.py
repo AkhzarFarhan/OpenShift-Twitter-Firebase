@@ -484,7 +484,7 @@ async def outTweet(tweet):
                    "content": text, "replies": replies, "retweets": retweets, "likes": likes, "hashtags": hashtags,
                    "tag": arg.s}
             #url = 'https://selenium-try-49063.firebaseio.com/text.json'
-            url = 'gs://twitterbotfortelegram.appspot.com/text.json'
+            url = 'https://twitterbotfortelegram.firebaseio.com/text.json'
             requests.post(url, json=dat)
             # time_wa = str(dat["time"])
             # if time_wa[4] == "5":
