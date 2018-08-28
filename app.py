@@ -11,7 +11,7 @@ import async_timeout
 import concurrent.futures
 import contextlib
 import csv
-import time
+import time as timee
 import datetime
 import hashlib
 import json
@@ -485,8 +485,11 @@ async def outTweet(tweet):
                    "tag": arg.s}
             url = 'https://selenium-try-49063.firebaseio.com/text.json'
             requests.post(url, json=dat)
-            time_wa = str(dat["time"])
-            if time_wa[4] == "5":
+            # time_wa = str(dat["time"])
+            # if time_wa[4] == "5":
+            #     requests.delete(url)
+            timeee = str(timee.asctime())
+            if timeee[14] == 0:
                 requests.delete(url)
         else:
             # Writes or appends to a file.
