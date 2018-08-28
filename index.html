@@ -1,0 +1,278 @@
+<!-- Thanks 'Ajay Rathore' for immense help in JavaScript -->
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<head>
+	<p class="header">Tweets are scraped in realtime. It is fast and free!</p>
+	<div class="copyright">
+		-Akhzar Farhan
+	</div>
+	<meta charset="utf-8">
+	<title>Tweets</title>
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	<style>
+		.box{
+			padding:10px;
+			font-family: 'Quicksand', sans-serif;
+			margin: 5px auto;
+			box-shadow:0 0 0 1px lightgreen;
+			border-radius: 10px;
+			border:1px solid grey;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+		}
+		.box div{
+			padding:2px;
+		}
+		#wrapShowtexts{
+		}
+		.msgbox{
+			font-family: 'Quicksand', sans-serif;
+			color:green;
+			text-align:center;
+			
+		}
+		#wrapShowtexts,.msgbox,#wrap-input{
+			margin:0 auto;	
+			padding:10px 0;
+			width:70vw;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			overflow: hidden;
+		}
+		#wrap-input{
+		}
+		@media only screen and (max-width:6in){
+			#wrapShowtexts,.msgbox,#wrap-input{
+				width:97vw;
+			}
+		}
+		#getText{
+			font-family: 'Quicksand', sans-serif;
+			width:95%;
+			border-radius:10px;
+			border-color: lightgreen;
+			padding:1%;
+		}
+		button{
+			background-color: #4CAF50;
+			color: white;
+			border-radius: 10px;
+			font-family: 'Quicksand', sans-serif;
+    	}
+    	.copyright {
+    		font-family: 'Quicksand', sans-serif;
+    		font-size: 8pt;
+    		text-align-last: right;
+    		padding-bottom: 10px;
+    		color: grey;
+		}
+		#count {
+			font-family: 'Quicksand', sans-serif;
+			font-size: 8pt;
+			text-align-last: left;
+			padding-bottom: 10px;
+			color: grey;
+		}
+		#submit button{
+			font-family: 'Quicksand', sans-serif;
+			background-color:black;
+			padding: 5px 10px;
+			font-size: 15px;
+		}
+		#selected{
+			font-family: 'Quicksand', sans-serif;
+			color: green;
+		}
+		.tags{
+			color: red;
+			font-family: 'Quicksand', sans-serif;
+			font-size: 25pt;
+			text-align-last: left;
+			padding-bottom: 5px 10px;
+			font-size: 15px;
+		}
+		.dateclass{
+			color: black;
+
+		}
+		.timeclass{
+			color: black;
+
+		}
+		.timezoneclass{
+			color: black;
+
+		}
+		.usernameclass{
+			color: blue;
+
+		}
+		.idclass{
+			color: black;
+
+		}
+		.contentclass{
+			color: black;
+			background: yellow;
+
+		}
+		.hashtagsclass{
+			color: black;
+
+		}
+		.likesclass{
+			color: black;
+
+		}
+		.repliesclass{
+			color: black;
+
+		}
+		.retweetsclass{
+			color: black;
+
+		}
+		.dateclasss{
+			font-weight: bold;
+			color: red;
+		}
+		.timeclasss{
+			font-weight: bold;
+			color: red;
+		}
+		.timezoneclasss{
+			font-weight: bold;
+			color: red;
+		}
+		.usernameclasss{
+			font-weight: bold;
+			color: red;
+		}
+		.idclasss{
+			font-weight: bold;
+			color: red;
+		}
+		.contentclasss{
+			font-weight: bold;
+			color: red;
+		}
+		.hashtagsclasss{
+			font-weight: bold;
+			color: red;
+		}
+		.likesclasss{
+			font-weight: bold;
+			color: red;
+		}
+		.repliesclasss{
+			font-weight: bold;
+			color: red;
+		}
+		.retweetsclasss{
+			font-weight: bold;
+			color: red;
+		}
+		.header{
+			color: green;
+			font-family: 'Quicksand', sans-serif;
+			font-size: 30px;
+			text-align-last: center;
+		}
+	</style>
+</head>
+<body>
+	<!-- <div id="wrap-input">
+		<textarea type="text" id="getText" placeholder="Enter your text"></textarea><br>
+		<div id="tags">
+			<button OnClick="tagType('Vuejs')">VueJs</button>
+			<button OnClick="tagType('ReactJs')">ReactJs</button>
+			<button OnClick="tagType('MachineLearning')">MachineLearning</button>
+			<button OnClick="tagType('ComputerNetworking')">ComputerNetworking</button>
+			<button OnClick="tagType('QuantumComputers')">QuantumComputers</button>
+			<button OnClick="tagType('Linux')">Linux</button>
+			<button OnClick="tagType('Medium')">Medium</button>
+			<button OnClick="tagType('MIT Review')">MIT Review</button>
+			<button OnClick="tagType('TheWire')">TheWire</button>
+			<button OnClick="tagType('TelegramBot')">TelegramBot</button>
+			<button OnClick="tagType('CollegeLAB')">College LAB</button>
+			<button OnClick="tagType('ExternalLinks')">External Links</button>
+			<button OnClick="tagType('Others')">Others</button>
+		</div>
+		<div id="selected"></div>
+		<div align="right" id="submit">
+			<button OnClick="submitText()">Save</button>
+		</div>
+	</div> -->
+	<div id="msgbox" class="msgbox"></div>
+	<div id="wrapShowtexts"></div>
+	<div id="count"></div>
+	<div class="copyright">
+		&copy; 2018 Akhzar Farhan
+	</div>
+</body>
+<script>
+		var allTexts=[]
+		var bar=[]
+		var text=''
+		// function submitText(){
+		// 		var text=document.getElementById('getText').value
+		// 		var senddata={}
+		// 			senddata.text=text
+		// 			senddata.tags=bar
+		// 			senddata.date=Date()
+		// 			console.log(senddata)
+		// 		axios.post('https://selenium-try-49063.firebaseio.com/text.json',senddata).then(function(res){
+		// 				document.getElementById('msgbox').innerHTML="Successfully Posted"
+		// 				bar=[];
+		// 				senddata={}
+
+		// 		})
+		// }
+		window.onload=getText()
+		function getText(){
+				axios.get('https://twitterbotfortelegram.firebaseio.com/text.json').then(function(res){
+						allTexts=[]
+						// i = 0
+						for(let key in res.data){
+								res.data.id=key;
+								allTexts.push(res.data[key])
+						}
+						allTexts.reverse()
+				}).then(function(){
+					for( let  i in allTexts){
+							text=text.concat(`<div class="box">
+									<div class="dateclass">${'<span class="dateclasss">Date: </span>' + allTexts[i].date}</div>
+									<div class="timeclass">${'<span class="timeclasss">Time: </span>'+ allTexts[i].time}</div>
+									<div class="timezoneclass">${'<span class="timezoneclasss">Timezone: </span>' + allTexts[i].timezone}</div>
+									<div class="usernameclass">${'<span class="usernameclasss">Username: </span>' + allTexts[i].username}</div>
+									<div class="idclass">${'<span class="idclasss">ID: </span>' + allTexts[i].id}</div>
+									<div class="contentclass">${'<span class="contentclasss">Tweet: </span>' + allTexts[i].content}</div>
+									<div class="hashtagsclass">${'<span class="hashtagsclasss">Hashtags: </span>' + allTexts[i].hashtags}</div>
+									<div class="likesclass">${'<span class="likesclasss">Likes: </span>' + allTexts[i].likes}</div>
+									<div class="repliesclass">${'<span class="repliesclasss">Replies: </span>' + allTexts[i].replies}</div>
+									<div class="retweetsclass">${'<span class="retweetsclasss">Retweets: </span>' + allTexts[i].retweets}</div>
+									<div class="tags">#${allTexts[i].tag}</div>
+									<div class="copyright">${Date()}</div>
+							</div>`)
+					}
+				}).then(function(){
+						newtext=`Total posts: ${allTexts.length}`
+						// newtext = `Total posts: $()`
+						document.getElementById('count').innerHTML=newtext
+						document.getElementById('wrapShowtexts').innerHTML=text
+
+				})
+		}
+		function tagType(foo){
+			var index=bar.indexOf(foo)
+				if(index>=0)
+					bar.splice(index,1)
+				else
+					bar.push(foo)
+				document.getElementById('selected').innerHTML=bar
+			return bar
+		}
+</script>
+</html>
